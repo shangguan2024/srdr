@@ -25,7 +25,18 @@ if(WIN32)
     set_flag(SRDR_SYSTEM_WINDOWS)
 endif()
 
-add_subdirectory(application)
-add_subdirectory(renderer)
-add_subdirectory(platform)
+# Core support code, not specific to this project
+set(SRDR_CORE_INCLUDES ${PROJECT_SOURCE_DIR}/core)
 add_subdirectory(core)
+
+# Platform
+set(SRDR_PLATFORM_INCLUDES ${PROJECT_SOURCE_DIR}/platform)
+add_subdirectory(platform)
+
+# Renderer
+set(SRDR_RENDERER_INCLUDES ${PROJECT_SOURCE_DIR}/renderer)
+add_subdirectory(renderer)
+
+# Application
+set(SRDR_APPLICATION_INCLUDES ${PROJECT_SOURCE_DIR}/application)
+add_subdirectory(application)
