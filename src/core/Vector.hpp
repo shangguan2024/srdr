@@ -15,6 +15,9 @@ public:
         requires(sizeof...(Args) == N)
     Vector(Args&&... args);
 
+    T& operator[](size_t index);
+    const T& operator[](size_t index) const;
+
 private:
     std::array<T, N> m_data;
 };
