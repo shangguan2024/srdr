@@ -8,10 +8,6 @@
 
 namespace srdr {
 
-WindowFactory::WindowFactory() {}
-
-WindowFactory::~WindowFactory() {}
-
 std::unique_ptr<IWindow> WindowFactory::creatWindow() {
 #ifdef SRDR_SYSTEM_WINDOWS
     return std::make_unique<Win32Window>();

@@ -8,8 +8,8 @@ namespace srdr {
 
 class WindowFactory {
 public:
-    WindowFactory();
-    ~WindowFactory();
+    WindowFactory() = default;
+    ~WindowFactory() = default;
 
     std::unique_ptr<IWindow> creatWindow();
 
