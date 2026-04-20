@@ -1,5 +1,5 @@
 add_library(
-    sdrd_core
+    srdr_core
     STATIC
     Vector.cpp
     Color.cpp
