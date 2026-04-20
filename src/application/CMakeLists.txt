@@ -1,1 +1,27 @@
-add_executable(srdr app.cpp)
+set(
+SRDR_APPLICATION_HEADERS
+)
+
+set(
+SRDR_APPLICATION_SOURCES
+    app.cpp
+)
+
+add_executable(srdr ${SRDR_APPLICATION_HEADERS} ${SRDR_APPLICATION_SOURCES})
+
+target_include_directories(
+srdr
+PUBLIC
+    ${SRDR_APPLICATION_INCLUDES}
+    ${SRDR_CORE_INCLUDES}
+    ${SRDR_PLATFORM_INCLUDES}
+    ${SRDR_RENDERER_INCLUDES}
+)
+
+target_link_libraries(
+srdr
+PRIVATE
+    srdr_core
+    srdr_platform
+    srdr_renderer
+)
