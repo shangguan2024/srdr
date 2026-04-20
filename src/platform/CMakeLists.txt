@@ -17,3 +17,9 @@ target_include_directories(
     PUBLIC
     ${SRDR_CORE_INCLUDES}
 )
+
+target_link_libraries(
+    srdr_platform
+    PUBLIC
+    srdr_core
+)
