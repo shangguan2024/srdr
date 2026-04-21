@@ -1,5 +1,5 @@
-#ifndef WINDOWFACTORY_HPP
-#define WINDOWFACTORY_HPP
+#ifndef WINDOW_FACTORY_HPP
+#define WINDOW_FACTORY_HPP
 
 #include "IWindow.hpp"
 #include <memory>
@@ -11,11 +11,9 @@ public:
     WindowFactory() = default;
     ~WindowFactory() = default;
 
-    std::unique_ptr<IWindow> creatWindow();
-
-private:
+    std::unique_ptr<IWindow> createWindow();
 };
 
 } // namespace srdr
 
-#endif // WINDOWFACTORY_HPP
+#endif // WINDOW_FACTORY_HPP

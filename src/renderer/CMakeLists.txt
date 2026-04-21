@@ -1,11 +1,25 @@
 set(
 SRDR_RENDERER_HEADERS
+    VertexLoader.hpp
+    VertexShader.hpp
+    PrimitiveAssembler.hpp
+    Rasterizer.hpp
+    PixelShader.hpp
+    OutputMerger.hpp
     FrameBuffer.hpp
+    Renderer.hpp
 )
 
 set(
 SRDR_RENDERER_SOURCES
+    VertexLoader.cpp
+    VertexShader.cpp
+    PrimitiveAssembler.cpp
+    Rasterizer.cpp
+    PixelShader.cpp
+    OutputMerger.cpp
     FrameBuffer.cpp
+    Renderer.cpp
 )
 
 add_library(

@@ -1,5 +1,5 @@
-#ifndef WIN32WINDOW_HPP
-#define WIN32WINDOW_HPP
+#ifndef WIN32_WINDOW_HPP
+#define WIN32_WINDOW_HPP
 
 #include "IWindow.hpp"
 #include <cstdint>
@@ -31,4 +31,4 @@ private:
 
 } // namespace srdr
 
-#endif // WIN32WINDOW_HPP
+#endif // WIN32_WINDOW_HPP
