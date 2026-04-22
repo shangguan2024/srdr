@@ -1,6 +1,10 @@
 #ifndef VERTEX_LOADER_HPP
 #define VERTEX_LOADER_HPP
 
-namespace srdr {}
+namespace srdr {
+
+class VertexLoader {};
+
+} // namespace srdr
 
 #endif // VERTEX_LOADER_HPP
