@@ -1,6 +1,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
+#include <algorithm>
 #include <array>
 #include <cstddef>
 #include <tuple>
@@ -71,13 +72,13 @@ constexpr const auto& get(const Vector<T, N>& vec) noexcept {
 template<std::size_t I, typename T, std::size_t N>
 constexpr auto&& get(Vector<T, N>&& vec) noexcept {
     static_assert(I < N, "Index out of bounds");
-    return vec[I];
+    return std::move(vec[I]);
 }
 
 template<std::size_t I, typename T, std::size_t N>
 constexpr const auto&& get(const Vector<T, N>&& vec) noexcept {
     static_assert(I < N, "Index out of bounds");
-    return vec[I];
+    return std::move(vec[I]);
 }
 
 } // namespace srdr
