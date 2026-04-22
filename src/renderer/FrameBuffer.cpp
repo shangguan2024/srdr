@@ -1,4 +1,5 @@
 #include "FrameBuffer.hpp"
+#include <cstdint>
 
 namespace srdr {
 
@@ -12,5 +13,9 @@ void FrameBuffer::putPixel(int x, int y, const Color& color) {
         m_pixels[x + y * m_width] = color.toUint32();
     }
 }
+
+uint32_t* FrameBuffer::data() { return m_pixels.data(); }
+
+const uint32_t* FrameBuffer::data() const { return m_pixels.data(); }
 
 } // namespace srdr
