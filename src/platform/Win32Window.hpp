@@ -15,6 +15,9 @@ public:
     bool create(int width, int height, const char* title) override;
     void destroy() override;
 
+    Vec2i getWindowSize() override;
+    void getWindowSize(int& width, int& height) override;
+
     bool isRunning() override;
     void drawFrame(const uint32_t* pixels) override;
 

@@ -11,7 +11,7 @@ public:
     WindowFactory() = default;
     ~WindowFactory() = default;
 
-    std::unique_ptr<IWindow> createWindow();
+    std::shared_ptr<IWindow> createWindow();
 };
 
 } // namespace srdr

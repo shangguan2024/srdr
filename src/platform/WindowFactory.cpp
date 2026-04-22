@@ -8,9 +8,9 @@
 
 namespace srdr {
 
-std::unique_ptr<IWindow> WindowFactory::createWindow() {
+std::shared_ptr<IWindow> WindowFactory::createWindow() {
 #ifdef SRDR_SYSTEM_WINDOWS
-    return std::make_unique<Win32Window>();
+    return std::make_shared<Win32Window>();
 #else
     // TODO
 #endif

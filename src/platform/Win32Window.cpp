@@ -73,6 +73,10 @@ void Win32Window::destroy() {
     m_pixels = nullptr;
 }
 
+Vec2i Win32Window::getWindowSize() { return Vec2i(m_width, m_height); }
+
+void Win32Window::getWindowSize(int& width, int& height) { width = m_width, height = m_height; }
+
 bool Win32Window::isRunning() {
     MSG msg;
     while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
