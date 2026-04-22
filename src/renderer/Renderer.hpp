@@ -17,6 +17,8 @@ class Renderer {
 public:
     explicit Renderer(std::shared_ptr<IWindow> window);
 
+    void render();
+
 private:
     void init();
 
