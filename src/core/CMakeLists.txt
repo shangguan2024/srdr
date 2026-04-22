@@ -6,7 +6,6 @@ SRDR_CORE_HEADERS
 
 set(
 SRDR_CORE_SOURCES
-    Vector.cpp
     Color.cpp
 )
 
