@@ -3,6 +3,8 @@
 
 #include <array>
 #include <cstddef>
+#include <tuple>
+#include <type_traits>
 
 namespace srdr {
 
@@ -54,6 +56,42 @@ const T& Vector<T, N>::operator[](size_t index) const {
     return m_data[index];
 }
 
+template<std::size_t I, typename T, std::size_t N>
+constexpr auto& get(Vector<T, N>& vec) noexcept {
+    static_assert(I < N, "Index out of bounds");
+    return vec[I];
+}
+
+template<std::size_t I, typename T, std::size_t N>
+constexpr const auto& get(const Vector<T, N>& vec) noexcept {
+    static_assert(I < N, "Index out of bounds");
+    return vec[I];
+}
+
+template<std::size_t I, typename T, std::size_t N>
+constexpr auto&& get(Vector<T, N>&& vec) noexcept {
+    static_assert(I < N, "Index out of bounds");
+    return vec[I];
+}
+
+template<std::size_t I, typename T, std::size_t N>
+constexpr const auto&& get(const Vector<T, N>&& vec) noexcept {
+    static_assert(I < N, "Index out of bounds");
+    return vec[I];
+}
+
 } // namespace srdr
+
+namespace std {
+
+template<typename T, size_t N>
+struct tuple_size<srdr::Vector<T, N>> : integral_constant<size_t, N> {};
+
+template<size_t I, typename T, size_t N>
+struct tuple_element<I, srdr::Vector<T, N>> {
+    using type = T;
+};
+
+} // namespace std
 
 #endif // VECTOR_HPP
