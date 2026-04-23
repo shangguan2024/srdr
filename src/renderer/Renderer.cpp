@@ -1,6 +1,7 @@
 #include "Renderer.hpp"
 #include "FrameBuffer.hpp"
 #include "IWindow.hpp"
+#include "shader_interfaces/DepthBuffer.hpp"
 #include <memory>
 #include <utility>
 
@@ -23,6 +24,7 @@ void Renderer::init() {
     // TODO
 
     m_frame_buffer = std::make_unique<FrameBuffer>(window_width, window_height);
+    m_depth_buffer = std::make_unique<DepthBuffer>(window_width, window_height);
 }
 
 } // namespace srdr

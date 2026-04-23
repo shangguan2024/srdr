@@ -9,8 +9,7 @@ namespace srdr {
 
 class FrameBuffer {
 public:
-    FrameBuffer() = default;
-    FrameBuffer(int width, int height);
+    explicit FrameBuffer(int width, int height);
 
     void putPixel(int x, int y, const Color& color);
 

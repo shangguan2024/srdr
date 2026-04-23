@@ -1,6 +1,5 @@
 set(
 SRDR_RENDERER_HEADERS
-    shader_interfaces/FrameBuffer.hpp
     VertexLoader.hpp
     VertexShader.hpp
     PrimitiveAssembler.hpp
@@ -8,11 +7,13 @@ SRDR_RENDERER_HEADERS
     PixelShader.hpp
     OutputMerger.hpp
     Renderer.hpp
+
+    shader_interfaces/FrameBuffer.hpp
+    shader_interfaces/DepthBuffer.hpp
 )
 
 set(
 SRDR_RENDERER_SOURCES
-    shader_interfaces/FrameBuffer.cpp
     VertexLoader.cpp
     VertexShader.cpp
     PrimitiveAssembler.cpp
@@ -20,6 +21,9 @@ SRDR_RENDERER_SOURCES
     PixelShader.cpp
     OutputMerger.cpp
     Renderer.cpp
+
+    shader_interfaces/FrameBuffer.cpp
+    shader_interfaces/DepthBuffer.cpp
 )
 
 add_library(
