@@ -9,14 +9,13 @@
 #include "Rasterizer.hpp"
 #include "VertexLoader.hpp"
 #include "VertexShader.hpp"
-#include "shader_interfaces/DepthBuffer.hpp"
 #include <memory>
 
 namespace srdr {
 
 class Renderer {
 public:
-    explicit Renderer(std::shared_ptr<IWindow> window);
+    Renderer(std::shared_ptr<IWindow> window);
 
     void render();
 
@@ -33,7 +32,6 @@ private:
     std::unique_ptr<OutputMerger> m_output_merger;
 
     std::unique_ptr<FrameBuffer> m_frame_buffer;
-    std::unique_ptr<DepthBuffer> m_depth_buffer;
 };
 
 } // namespace srdr

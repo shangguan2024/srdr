@@ -2,23 +2,38 @@
 #define FRAME_BUFFER_HPP
 
 #include "Color.hpp"
+#include "ColorAttachment.hpp"
+#include "DepthAttachment.hpp"
 #include <cstdint>
+#include <optional>
 #include <vector>
 
 namespace srdr {
 
 class FrameBuffer {
 public:
-    explicit FrameBuffer(int width, int height);
+    FrameBuffer(int width, int height, int colorAttachmentCount = 1, bool hasDepth = true);
 
-    void putPixel(int x, int y, const Color& color);
+    void enableDepth();
 
-    uint32_t* data();
-    const uint32_t* data() const;
+    void writeColor(int index, int x, int y, const Color& color);
+    void writeColor(int index, int x, int y, uint32_t color);
+
+    void writeDepth(int x, int y, float depth);
+    bool testDepth(int x, int y, float depth) const;
+    bool testAndWriteDepth(int x, int y, float depth);
+
+    uint32_t* getColorAttachmentData(int index);
+    const uint32_t* getColorAttachmentData(int index) const;
+
+    float* getDepthAttachmentData();
+    const float* getDepthAttachmentData() const;
 
 private:
     int m_width, m_height;
-    std::vector<uint32_t> m_pixels;
+
+    std::vector<ColorAttachment> m_color_attachments;
+    std::optional<DepthAttachment> m_depth_attachment;
 };
 
 } // namespace srdr

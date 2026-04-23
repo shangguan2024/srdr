@@ -9,7 +9,8 @@ SRDR_RENDERER_HEADERS
     Renderer.hpp
 
     shader_interfaces/FrameBuffer.hpp
-    shader_interfaces/DepthBuffer.hpp
+    shader_interfaces/ColorAttachment.hpp
+    shader_interfaces/DepthAttachment.hpp
 )
 
 set(
@@ -23,7 +24,8 @@ SRDR_RENDERER_SOURCES
     Renderer.cpp
 
     shader_interfaces/FrameBuffer.cpp
-    shader_interfaces/DepthBuffer.cpp
+    shader_interfaces/ColorAttachment.cpp
+    shader_interfaces/DepthAttachment.cpp
 )
 
 add_library(
