@@ -7,22 +7,92 @@
 #include <tuple>
 #include <type_traits>
 
+namespace detail {
+
+template<typename T, std::size_t N>
+struct VectorStorage {};
+
+template<typename T>
+struct VectorStorage<T, 1> {
+    template<typename... Args>
+    VectorStorage(Args&&... args) requires(sizeof...(Args) == 1)
+            : data{ static_cast<T>(std::forward<Args>(args))... } {}
+
+    union {
+        T x;
+        std::array<T, 1> data;
+    };
+};
+
+template<typename T>
+struct VectorStorage<T, 2> {
+    template<typename... Args>
+    VectorStorage(Args&&... args) requires(sizeof...(Args) == 2)
+            : data{ static_cast<T>(std::forward<Args>(args))... } {}
+
+    // clang-format off
+    union {
+        struct { T x, y; };
+        struct { T s, t; };
+        std::array<T, 2> data;
+    };
+    // clang-format on
+};
+
+template<typename T>
+struct VectorStorage<T, 3> {
+    template<typename... Args>
+    VectorStorage(Args&&... args) requires(sizeof...(Args) == 3)
+            : data{ static_cast<T>(std::forward<Args>(args))... } {}
+
+    // clang-format off
+    union {
+        struct { T x, y, z; };
+        struct { T r, g, b; };
+        std::array<T, 3> data;
+    };
+    // clang-format on
+};
+
+template<typename T>
+struct VectorStorage<T, 4> {
+    template<typename... Args>
+    VectorStorage(Args&&... args) requires(sizeof...(Args) == 4)
+            : data{ static_cast<T>(std::forward<Args>(args))... } {}
+
+    // clang-format off
+    union {
+        struct { T x, y, z, w; };
+        struct { T r, g, b, a; };
+        struct { T s, t, p, q; };
+        std::array<T, 4> data;
+    };
+    // clang-format on
+};
+
+template<typename T, std::size_t N>
+requires(N > 4)
+struct VectorStorage<T, N> {
+    template<typename... Args>
+    VectorStorage(Args&&... args) requires(sizeof...(Args) == N)
+            : data{ static_cast<T>(std::forward<Args>(args))... } {}
+    std::array<T, N> data;
+};
+
+} // namespace detail
+
 namespace srdr {
 
 template<typename T, std::size_t N>
-class Vector {
+class Vector : public detail::VectorStorage<T, N> {
 public:
-    Vector() = default;
-
     template<typename... Args>
-        requires(sizeof...(Args) == N)
-    Vector(Args&&... args);
+    Vector(Args&&... args) requires(sizeof...(Args) == N);
+
+    using detail::VectorStorage<T, N>::data;
 
     T& operator[](size_t index);
     const T& operator[](size_t index) const;
-
-private:
-    std::array<T, N> m_data;
 };
 
 using Vec2 = Vector<float, 2>;
@@ -43,18 +113,17 @@ using Vec4d = Vector<double, 4>;
 
 template<typename T, size_t N>
 template<typename... Args>
-    requires(sizeof...(Args) == N)
-Vector<T, N>::Vector(Args&&... args)
-        : m_data{ static_cast<T>(std::forward<Args>(args))... } {}
+Vector<T, N>::Vector(Args&&... args) requires(sizeof...(Args) == N)
+        : detail::VectorStorage<T, N>(args...) {}
 
 template<typename T, size_t N>
 T& Vector<T, N>::operator[](size_t index) {
-    return m_data[index];
+    return data[index];
 }
 
 template<typename T, size_t N>
 const T& Vector<T, N>::operator[](size_t index) const {
-    return m_data[index];
+    return data[index];
 }
 
 template<std::size_t I, typename T, std::size_t N>
