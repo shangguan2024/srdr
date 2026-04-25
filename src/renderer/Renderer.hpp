@@ -20,10 +20,13 @@ class Renderer {
 public:
     Renderer(std::shared_ptr<IWindow> window);
 
-    void render();
+    void beginScene();
+    void endScene();
 
 private:
     void init();
+
+    void render();
 
     std::shared_ptr<IWindow> m_window;
 
@@ -37,6 +40,7 @@ private:
     std::vector<Vertex> m_vertex_buffer;
     std::vector<std::size_t> m_index_buffer;
     std::vector<VertexInput> m_vertex_input_cache;
+    std::vector<VertexOutput> m_vertex_output_cache;
     std::unique_ptr<FrameBuffer> m_frame_buffer;
 };
 
