@@ -14,6 +14,8 @@ struct VectorStorage {};
 
 template<typename T>
 struct VectorStorage<T, 1> {
+    VectorStorage() = default;
+
     template<typename... Args>
     VectorStorage(Args&&... args) requires(sizeof...(Args) == 1)
             : data{ static_cast<T>(std::forward<Args>(args))... } {}
@@ -26,6 +28,8 @@ struct VectorStorage<T, 1> {
 
 template<typename T>
 struct VectorStorage<T, 2> {
+    VectorStorage() = default;
+
     template<typename... Args>
     VectorStorage(Args&&... args) requires(sizeof...(Args) == 2)
             : data{ static_cast<T>(std::forward<Args>(args))... } {}
@@ -41,6 +45,8 @@ struct VectorStorage<T, 2> {
 
 template<typename T>
 struct VectorStorage<T, 3> {
+    VectorStorage() = default;
+
     template<typename... Args>
     VectorStorage(Args&&... args) requires(sizeof...(Args) == 3)
             : data{ static_cast<T>(std::forward<Args>(args))... } {}
@@ -56,6 +62,8 @@ struct VectorStorage<T, 3> {
 
 template<typename T>
 struct VectorStorage<T, 4> {
+    VectorStorage() = default;
+
     template<typename... Args>
     VectorStorage(Args&&... args) requires(sizeof...(Args) == 4)
             : data{ static_cast<T>(std::forward<Args>(args))... } {}
@@ -86,6 +94,8 @@ namespace srdr {
 template<typename T, std::size_t N>
 class Vector : public detail::VectorStorage<T, N> {
 public:
+    Vector() = default;
+
     template<typename... Args>
     Vector(Args&&... args) requires(sizeof...(Args) == N);
 
