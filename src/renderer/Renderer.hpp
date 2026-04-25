@@ -7,9 +7,12 @@
 #include "PixelShader.hpp"
 #include "PrimitiveAssembler.hpp"
 #include "Rasterizer.hpp"
+#include "Vertex.hpp"
 #include "VertexLoader.hpp"
 #include "VertexShader.hpp"
+#include <cstddef>
 #include <memory>
+#include <vector>
 
 namespace srdr {
 
@@ -31,6 +34,9 @@ private:
     std::unique_ptr<PixelShader> m_pixel_shader;
     std::unique_ptr<OutputMerger> m_output_merger;
 
+    std::vector<Vertex> m_vertex_buffer;
+    std::vector<std::size_t> m_index_buffer;
+    std::vector<VertexInput> m_vertex_input_cache;
     std::unique_ptr<FrameBuffer> m_frame_buffer;
 };
 

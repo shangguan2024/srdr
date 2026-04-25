@@ -32,7 +32,7 @@ bool DepthAttachment::testAndWrite(int x, int y, float depth) {
     return false;
 }
 
-void DepthAttachment::clear() { std::ranges::fill(m_depths, 1.0); }
+void DepthAttachment::clear() { std::ranges::fill(m_depths, 1.0f); }
 
 float* DepthAttachment::data() { return m_depths.data(); }
 

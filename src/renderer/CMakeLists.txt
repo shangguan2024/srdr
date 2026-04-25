@@ -11,6 +11,7 @@ SRDR_RENDERER_HEADERS
     shader_interfaces/FrameBuffer.hpp
     shader_interfaces/ColorAttachment.hpp
     shader_interfaces/DepthAttachment.hpp
+    shader_interfaces/Vertex.hpp
 )
 
 set(
