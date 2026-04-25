@@ -51,5 +51,6 @@ add_subdirectory(renderer)
 set(
 SRDR_APPLICATION_INCLUDES
     ${PROJECT_SOURCE_DIR}/application
+    ${PROJECT_SOURCE_DIR}/application/examples
 )
 add_subdirectory(application)

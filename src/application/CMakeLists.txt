@@ -1,10 +1,13 @@
 set(
 SRDR_APPLICATION_HEADERS
+    examples/ExampleWindowTest.hpp
 )
 
 set(
 SRDR_APPLICATION_SOURCES
     app.cpp
+
+    examples/ExampleWindowTest.cpp
 )
 
 add_executable(srdr ${SRDR_APPLICATION_HEADERS} ${SRDR_APPLICATION_SOURCES})
