@@ -103,6 +103,11 @@ public:
 
     T& operator[](size_t index);
     const T& operator[](size_t index) const;
+
+    template<typename Ta>
+    Vector operator*(Ta value) const;
+    template<typename Ta>
+    Vector& operator*=(Ta value);
 };
 
 using Vec2 = Vector<float, 2>;
@@ -134,6 +139,21 @@ T& Vector<T, N>::operator[](size_t index) {
 template<typename T, size_t N>
 const T& Vector<T, N>::operator[](size_t index) const {
     return data[index];
+}
+
+template<typename T, size_t N>
+template<typename Ta>
+Vector<T, N> Vector<T, N>::operator*(Ta value) const {
+    Vector<T, N> vec(*this);
+    for (auto& elem: vec.data) elem *= value;
+    return vec;
+}
+
+template<typename T, size_t N>
+template<typename Ta>
+Vector<T, N>& Vector<T, N>::operator*=(Ta value) {
+    for (auto& elem: data) elem *= value;
+    return *this;
 }
 
 template<std::size_t I, typename T, std::size_t N>
