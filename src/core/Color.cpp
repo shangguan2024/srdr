@@ -27,4 +27,13 @@ uint32_t Color::toUint32() const {
     return val;
 }
 
+Color Color::operator*(float value) const {
+    return Color(m_data[0] * value, m_data[1] * value, m_data[2] * value, m_data[3] * value);
+}
+
+Color& Color::operator*=(float value) {
+    m_data *= value;
+    return *this;
+}
+
 } // namespace srdr

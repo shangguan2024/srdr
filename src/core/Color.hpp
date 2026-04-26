@@ -20,6 +20,9 @@ public:
     // Returns a 4 byte value equal to #AARRGGBB
     uint32_t toUint32() const;
 
+    Color operator*(float value) const;
+    Color& operator*=(float value);
+
 private:
     Vec4f m_data;
 };
