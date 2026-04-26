@@ -2,6 +2,7 @@
 #define PRIMITIVE_ASSEMBLER_HPP
 
 #include "Primitive.hpp"
+#include "Vector.hpp"
 #include "Vertex.hpp"
 #include <vector>
 
@@ -9,12 +10,16 @@ namespace srdr {
 
 class PrimitiveAssembler {
 public:
-    void assemblePrimitives(const std::vector<VertexOutput>& vertices,
+    void setWindowSize(const Vec2i& window_size);
+
+    void assemblePrimitives(const std::vector<ClipVertex>& vertices,
             std::vector<Primitive>& primitives);
 
 private:
-    [[nodiscard]] Primitive assemblePrimitive(const VertexOutput& A, const VertexOutput& B,
-            const VertexOutput& C);
+    [[nodiscard]] Primitive assemblePrimitive(const ClipVertex& A, const ClipVertex& B,
+            const ClipVertex& C);
+
+    int m_width, m_height; // window size
 };
 
 } // namespace srdr

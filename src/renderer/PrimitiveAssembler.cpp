@@ -1,11 +1,18 @@
 #include "PrimitiveAssembler.hpp"
 #include "Geometry.hpp"
 #include "Primitive.hpp"
+#include "Vector.hpp"
+#include "shader_interfaces/Vertex.hpp"
 #include <cstddef>
 
 namespace srdr {
 
-void PrimitiveAssembler::assemblePrimitives(const std::vector<VertexOutput>& vertices,
+void PrimitiveAssembler::setWindowSize(const Vec2i& window_size) {
+    m_width = window_size.x;
+    m_height = window_size.y;
+}
+
+void PrimitiveAssembler::assemblePrimitives(const std::vector<ClipVertex>& vertices,
         std::vector<Primitive>& primitives) {
     for (std::size_t i = 2ull; i < vertices.size(); i += 3ull) {
         const auto& A = vertices[i - 2ull];
@@ -15,25 +22,46 @@ void PrimitiveAssembler::assemblePrimitives(const std::vector<VertexOutput>& ver
     }
 }
 
-[[nodiscard]] Primitive PrimitiveAssembler::assemblePrimitive(const VertexOutput& A,
-        const VertexOutput& B, const VertexOutput& C) {
+[[nodiscard]] Primitive PrimitiveAssembler::assemblePrimitive(const ClipVertex& A,
+        const ClipVertex& B, const ClipVertex& C) {
     Primitive p;
-    p.vertices[0] = A;
-    p.vertices[1] = B;
-    p.vertices[2] = C;
 
-    const auto& a = A.v_position;
-    const auto& b = B.v_position;
-    const auto& c = C.v_position;
+    auto clipToScreen = [&](const ClipVertex& cv) -> ScreenVertex {
+        ScreenVertex sv;
+        float& inv_w = sv.inv_w;
+        inv_w = 1.0f / cv.v_position.w;
+
+        float ndc_x = cv.v_position.x * inv_w;
+        float ndc_y = cv.v_position.y * inv_w;
+        float ndc_z = cv.v_position.z * inv_w;
+
+        sv.position.x = (ndc_x * 0.5f + 0.5f) * m_width;
+        sv.position.y = (ndc_y * 0.5f + 0.5f) * m_height;
+        sv.position.z = ndc_z * 0.5f + 0.5f;
+
+        sv.v_normal = cv.v_normal * inv_w;
+        sv.v_color = cv.v_color * inv_w;
+        sv.v_uv = cv.v_uv * inv_w;
+
+        return sv;
+    };
+
+    p.vertices[0] = clipToScreen(A);
+    p.vertices[1] = clipToScreen(B);
+    p.vertices[2] = clipToScreen(C);
+
+    const auto& u0 = p.vertices[0].position;
+    const auto& u1 = p.vertices[1].position;
+    const auto& u2 = p.vertices[2].position;
 
     // AABB
-    p.aabb.min_x = (int) std::min({ a.x, b.x, c.x });
-    p.aabb.max_x = (int) std::max({ a.x, b.x, c.x });
-    p.aabb.min_y = (int) std::min({ a.y, b.y, c.y });
-    p.aabb.max_y = (int) std::max({ a.y, b.y, c.y });
+    p.aabb.min_x = (int) std::min({ u0.x, u1.x, u2.x });
+    p.aabb.max_x = (int) std::max({ u0.x, u1.x, u2.x });
+    p.aabb.min_y = (int) std::min({ u0.y, u1.y, u2.y });
+    p.aabb.max_y = (int) std::max({ u0.y, u1.y, u2.y });
 
     // signed area
-    p.area = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+    p.area = (u1.x - u0.x) * (u2.y - u0.y) - (u1.y - u0.y) * (u2.x - u0.x);
 
     // ensure counter-clockwise order
     if (p.area < 0) {
@@ -41,9 +69,9 @@ void PrimitiveAssembler::assemblePrimitives(const std::vector<VertexOutput>& ver
         p.area = -p.area;
     }
 
-    const auto& v0 = p.vertices[0].v_position;
-    const auto& v1 = p.vertices[1].v_position;
-    const auto& v2 = p.vertices[2].v_position;
+    const auto& v0 = p.vertices[0].position;
+    const auto& v1 = p.vertices[1].position;
+    const auto& v2 = p.vertices[2].position;
 
     // edge function: inside > 0 (counter-clockwise)
     // edge Ei from vi to v(i+1)

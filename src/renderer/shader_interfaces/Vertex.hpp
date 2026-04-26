@@ -27,6 +27,17 @@ struct VertexOutput {
     Vec2 v_uv;
 };
 
+using ClipVertex = VertexOutput;
+
+struct ScreenVertex {
+    Vec3 position;
+    float inv_w;
+
+    Vec3 v_normal;
+    Color v_color;
+    Vec2 v_uv;
+};
+
 } // namespace srdr
 
 #endif // VERTEX_HPP

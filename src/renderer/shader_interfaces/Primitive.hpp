@@ -14,7 +14,7 @@ struct EdgeEquation : public PlaneEquation {
 };
 
 struct Primitive {
-    std::array<VertexOutput, 3> vertices;
+    std::array<ScreenVertex, 3> vertices;
     AABB<int, 2> aabb;
     float area;
     std::array<EdgeEquation, 3> edges;
