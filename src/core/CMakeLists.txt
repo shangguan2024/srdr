@@ -1,12 +1,14 @@
 set(
 SRDR_CORE_HEADERS
-    Vector.hpp
     Color.hpp
+    Vector.hpp
+    Geometry.hpp
 )
 
 set(
 SRDR_CORE_SOURCES
     Color.cpp
+    Geometry.cpp
 )
 
 add_library(
