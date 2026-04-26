@@ -5,6 +5,7 @@
 #include "IWindow.hpp"
 #include "OutputMerger.hpp"
 #include "PixelShader.hpp"
+#include "Primitive.hpp"
 #include "PrimitiveAssembler.hpp"
 #include "Rasterizer.hpp"
 #include "Vertex.hpp"
@@ -13,6 +14,7 @@
 #include <cstddef>
 #include <memory>
 #include <vector>
+
 
 namespace srdr {
 
@@ -41,6 +43,7 @@ private:
     std::vector<std::size_t> m_index_buffer;
     std::vector<VertexInput> m_vertex_input_cache;
     std::vector<VertexOutput> m_vertex_output_cache;
+    std::vector<Primitive> m_primitive_cache;
     std::unique_ptr<FrameBuffer> m_frame_buffer;
 };
 

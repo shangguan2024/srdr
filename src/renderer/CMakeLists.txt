@@ -12,6 +12,7 @@ SRDR_RENDERER_HEADERS
     shader_interfaces/ColorAttachment.hpp
     shader_interfaces/DepthAttachment.hpp
     shader_interfaces/Vertex.hpp
+    shader_interfaces/Primitive.hpp
 )
 
 set(

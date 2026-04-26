@@ -1,6 +1,7 @@
 #include "Renderer.hpp"
 #include "FrameBuffer.hpp"
 #include "IWindow.hpp"
+#include "PrimitiveAssembler.hpp"
 #include "VertexLoader.hpp"
 #include "VertexShader.hpp"
 #include <memory>
@@ -18,6 +19,7 @@ void Renderer::beginScene() {
     m_index_buffer.clear();
     m_vertex_input_cache.clear();
     m_vertex_output_cache.clear();
+    m_primitive_cache.clear();
 }
 
 void Renderer::endScene() { render(); }
@@ -25,6 +27,7 @@ void Renderer::endScene() { render(); }
 void Renderer::render() {
     m_vertex_loader->loadVertex(m_vertex_buffer, m_index_buffer, m_vertex_input_cache);
     m_vertex_shader->processVertices(m_vertex_input_cache, m_vertex_output_cache);
+    m_primitive_assembler->assemblePrimitives(m_vertex_output_cache, m_primitive_cache);
 
     // TODO
 }
@@ -32,6 +35,7 @@ void Renderer::render() {
 void Renderer::init() {
     m_vertex_loader = std::make_unique<VertexLoader>();
     m_vertex_shader = std::make_unique<VertexShader>();
+    m_primitive_assembler = std::make_unique<PrimitiveAssembler>();
 
     // TODO
 
