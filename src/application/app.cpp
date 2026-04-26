@@ -1,8 +1,8 @@
-#include "ExampleWindowTest.hpp"
+#include "ExampleDrawTriangle.hpp"
 
 int main() {
-    srdr::ExampleWindowTest ewt;
-    ewt.run();
+    srdr::ExampleDrawTriangle edt;
+    edt.run();
 
     return 0;
 }

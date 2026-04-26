@@ -1,6 +1,7 @@
 set(
 SRDR_APPLICATION_HEADERS
     examples/ExampleWindowTest.hpp
+    examples/ExampleDrawTriangle.hpp
 )
 
 set(
@@ -8,6 +9,7 @@ SRDR_APPLICATION_SOURCES
     app.cpp
 
     examples/ExampleWindowTest.cpp
+    examples/ExampleDrawTriangle.cpp
 )
 
 add_executable(srdr ${SRDR_APPLICATION_HEADERS} ${SRDR_APPLICATION_SOURCES})
