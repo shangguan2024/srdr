@@ -4,6 +4,12 @@
 
 namespace srdr {
 
+Color::Color(float r, float g, float b)
+        : m_data(r, g, b, 1.0f) {}
+
+Color::Color(float r, float g, float b, float a)
+        : m_data(r, g, b, a) {}
+
 uint8_t Color::red() const { return uint8_t(std::round(m_data[0] * 255)); }
 
 uint8_t Color::green() const { return uint8_t(std::round(m_data[1] * 255)); }

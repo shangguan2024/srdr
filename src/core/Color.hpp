@@ -9,6 +9,8 @@ namespace srdr {
 class Color {
 public:
     Color() = default;
+    Color(float r, float g, float b);
+    Color(float r, float g, float b, float a);
 
     uint8_t red() const;
     uint8_t green() const;
