@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "FragmentShader.hpp"
 #include "FrameBuffer.hpp"
 #include "IWindow.hpp"
 #include "PrimitiveAssembler.hpp"
@@ -23,6 +24,7 @@ void Renderer::beginScene() {
     m_vertex_output_cache.clear();
     m_primitive_cache.clear();
     m_fragment_input_cache.clear();
+    m_fragment_output_cache.clear();
 }
 
 void Renderer::endScene() { render(); }
@@ -58,6 +60,7 @@ void Renderer::init() {
     m_vertex_shader = std::make_unique<VertexShader>();
     m_primitive_assembler = std::make_unique<PrimitiveAssembler>();
     m_rasterizer = std::make_unique<Rasterizer>();
+    m_fragment_shader = std::make_unique<FragmentShader>();
 
     // TODO
 

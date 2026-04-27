@@ -2,10 +2,10 @@
 #define RENDERER_HPP
 
 #include "Fragment.hpp"
+#include "FragmentShader.hpp"
 #include "FrameBuffer.hpp"
 #include "IWindow.hpp"
 #include "OutputMerger.hpp"
-#include "PixelShader.hpp"
 #include "Primitive.hpp"
 #include "PrimitiveAssembler.hpp"
 #include "Rasterizer.hpp"
@@ -40,7 +40,7 @@ private:
     std::unique_ptr<VertexShader> m_vertex_shader;
     std::unique_ptr<PrimitiveAssembler> m_primitive_assembler;
     std::unique_ptr<Rasterizer> m_rasterizer;
-    std::unique_ptr<PixelShader> m_pixel_shader;
+    std::unique_ptr<FragmentShader> m_fragment_shader;
     std::unique_ptr<OutputMerger> m_output_merger;
 
     std::vector<Vertex> m_vertex_buffer;
@@ -50,6 +50,7 @@ private:
     std::vector<ClipVertex>& m_clip_vertex_cache;
     std::vector<Primitive> m_primitive_cache;
     std::vector<FragmentInput> m_fragment_input_cache;
+    std::vector<FragmentOutput> m_fragment_output_cache;
     std::unique_ptr<FrameBuffer> m_frame_buffer;
 };
 

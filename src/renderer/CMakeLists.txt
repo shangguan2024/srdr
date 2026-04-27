@@ -4,7 +4,7 @@ SRDR_RENDERER_HEADERS
     VertexShader.hpp
     PrimitiveAssembler.hpp
     Rasterizer.hpp
-    PixelShader.hpp
+    FragmentShader.hpp
     OutputMerger.hpp
     Renderer.hpp
 
@@ -22,7 +22,7 @@ SRDR_RENDERER_SOURCES
     VertexShader.cpp
     PrimitiveAssembler.cpp
     Rasterizer.cpp
-    PixelShader.cpp
+    FragmentShader.cpp
     OutputMerger.cpp
     Renderer.cpp
 
