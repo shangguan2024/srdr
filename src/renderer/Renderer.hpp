@@ -9,6 +9,7 @@
 #include "Primitive.hpp"
 #include "PrimitiveAssembler.hpp"
 #include "Rasterizer.hpp"
+#include "Vector.hpp"
 #include "Vertex.hpp"
 #include "VertexLoader.hpp"
 #include "VertexShader.hpp"
@@ -35,6 +36,7 @@ private:
     void render();
 
     std::shared_ptr<IWindow> m_window;
+    Vec2i m_viewport_size;
 
     std::unique_ptr<VertexLoader> m_vertex_loader;
     std::unique_ptr<VertexShader> m_vertex_shader;

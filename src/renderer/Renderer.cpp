@@ -18,6 +18,8 @@ Renderer::Renderer(std::shared_ptr<IWindow> window)
 }
 
 void Renderer::beginScene() {
+    m_viewport_size = m_window->getWindowSize();
+
     m_vertex_buffer.clear();
     m_index_buffer.clear();
     m_vertex_input_cache.clear();
@@ -47,9 +49,9 @@ void Renderer::draw(const Vertex* vertices, int v_base, int v_count, const std::
 void Renderer::render() {
     m_vertex_loader->loadVertex(m_vertex_buffer, m_index_buffer, m_vertex_input_cache);
     m_vertex_shader->processVertices(m_vertex_input_cache, m_vertex_output_cache);
-    m_primitive_assembler->setWindowSize(m_window->getWindowSize());
+    m_primitive_assembler->setWindowSize(m_viewport_size);
     m_primitive_assembler->assemblePrimitives(m_clip_vertex_cache, m_primitive_cache);
-    m_rasterizer->setWindowSize(m_window->getWindowSize());
+    m_rasterizer->setWindowSize(m_viewport_size);
     m_rasterizer->rasterizePrimitives(m_primitive_cache, m_fragment_input_cache);
     m_fragment_shader->processFragments(m_fragment_input_cache, m_fragment_output_cache);
 
