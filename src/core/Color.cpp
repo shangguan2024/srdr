@@ -13,8 +13,12 @@ Color::Color(float r, float g, float b, float a)
 Color::Color(const Vec4f& color)
         : data(color.data) {}
 
-Color Color::operator*(float value) const {
-    return Color(r * value, g * value, b * value, a * value);
+Color::Color(uint32_t argb) {
+    constexpr float denom = 1.0f / 255;
+    b = ((uint8_t*) (&argb))[0] * denom;
+    g = ((uint8_t*) (&argb))[1] * denom;
+    r = ((uint8_t*) (&argb))[2] * denom;
+    a = ((uint8_t*) (&argb))[3] * denom;
 }
 
 Color& Color::operator*=(float value) {
@@ -40,6 +44,14 @@ uint32_t Color::toUint32() const {
     ((uint8_t*) (&val))[1] = green();
     ((uint8_t*) (&val))[0] = blue();
     return val;
+}
+
+Color operator+(const Color& c1, const Color& c2) {
+    return Color(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b, c1.a + c2.a);
+}
+
+Color operator*(const Color& color, float value) {
+    return Color(color.r * value, color.g * value, color.b * value, color.a * value);
 }
 
 } // namespace srdr

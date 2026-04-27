@@ -12,6 +12,7 @@ struct Color {
     Color(float r, float g, float b);
     Color(float r, float g, float b, float a);
     Color(const Vec4f& color);
+    Color(uint32_t argb);
 
     // clang-format off
     union {
@@ -20,7 +21,6 @@ struct Color {
     };
     // clang-format on
 
-    Color operator*(float value) const;
     Color& operator*=(float value);
 
     uint8_t red() const;
@@ -31,6 +31,10 @@ struct Color {
     // Returns a 4 byte value equal to #AARRGGBB
     uint32_t toUint32() const;
 };
+
+Color operator+(const Color& c1, const Color& c2);
+
+Color operator*(const Color& color, float value);
 
 } // namespace srdr
 
