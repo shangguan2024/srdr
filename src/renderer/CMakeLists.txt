@@ -13,6 +13,7 @@ SRDR_RENDERER_HEADERS
     shader_interfaces/DepthAttachment.hpp
     shader_interfaces/Vertex.hpp
     shader_interfaces/Primitive.hpp
+    shader_interfaces/Fragment.hpp
 )
 
 set(
