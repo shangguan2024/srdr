@@ -14,7 +14,7 @@ int ExampleDrawTriangle::run() {
     WindowFactory wf;
     auto window = wf.createWindow();
     const int width = 800, height = 600;
-    if (!window->create(width, height, "Test")) {
+    if (!window->create(width, height, "Triangle")) {
         std::cerr << "Failed to create window" << std::endl;
         return -1;
     }

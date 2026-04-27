@@ -1,8 +1,8 @@
-#include "ExampleDepthTest.hpp"
+#include "ExampleBlend.hpp"
 
 int main() {
-    srdr::ExampleDepthTest edt;
-    edt.run();
+    srdr::ExampleBlend eb;
+    eb.run();
 
     return 0;
 }
