@@ -8,13 +8,13 @@
 
 namespace srdr {
 
-void ExampleWindowTest::run() {
+int ExampleWindowTest::run() {
     WindowFactory wf;
     auto window = wf.createWindow();
     const int width = 800, height = 600;
     if (!window->create(width, height, "Pixel Display Test")) {
         std::cerr << "Failed to create window" << std::endl;
-        return;
+        return -1;
     }
 
     std::vector<uint32_t> framebuffer(width * height);
@@ -34,6 +34,8 @@ void ExampleWindowTest::run() {
 
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
     }
+
+    return 0;
 }
 
 } // namespace srdr

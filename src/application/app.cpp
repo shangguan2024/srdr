@@ -1,7 +1,7 @@
-#include "ExampleDrawTriangle.hpp"
+#include "ExampleDepthTest.hpp"
 
 int main() {
-    srdr::ExampleDrawTriangle edt;
+    srdr::ExampleDepthTest edt;
     edt.run();
 
     return 0;

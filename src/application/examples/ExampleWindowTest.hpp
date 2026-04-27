@@ -5,7 +5,7 @@ namespace srdr {
 
 class ExampleWindowTest {
 public:
-    void run();
+    int run();
 };
 
 } // namespace srdr
