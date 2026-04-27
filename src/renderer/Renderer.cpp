@@ -2,6 +2,7 @@
 #include "FragmentShader.hpp"
 #include "FrameBuffer.hpp"
 #include "IWindow.hpp"
+#include "OutputMerger.hpp"
 #include "PrimitiveAssembler.hpp"
 #include "Rasterizer.hpp"
 #include "VertexLoader.hpp"
@@ -54,8 +55,10 @@ void Renderer::render() {
     m_rasterizer->setWindowSize(m_viewport_size);
     m_rasterizer->rasterizePrimitives(m_primitive_cache, m_fragment_input_cache);
     m_fragment_shader->processFragments(m_fragment_input_cache, m_fragment_output_cache);
+    m_output_merger->mergeOutputs(m_fragment_output_cache, m_frame_buffer.get());
 
     // TODO
+    m_window->drawFrame(m_frame_buffer->getColorAttachmentData(0));
 }
 
 void Renderer::init() {
@@ -64,8 +67,7 @@ void Renderer::init() {
     m_primitive_assembler = std::make_unique<PrimitiveAssembler>();
     m_rasterizer = std::make_unique<Rasterizer>();
     m_fragment_shader = std::make_unique<FragmentShader>();
-
-    // TODO
+    m_output_merger = std::make_unique<OutputMerger>();
 
     auto [window_width, window_height] = m_window->getWindowSize();
     m_frame_buffer = std::make_unique<FrameBuffer>(window_width, window_height);
