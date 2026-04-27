@@ -34,6 +34,12 @@ bool FrameBuffer::testAndWriteDepth(int x, int y, float depth) {
     return m_depth_attachment->testAndWrite(x, y, depth);
 }
 
+Color FrameBuffer::getColor(int index, int x, int y) const {
+    return Color(m_color_attachments[index].get(x, y));
+}
+
+float FrameBuffer::getDepth(int x, int y) const { return m_depth_attachment->get(x, y); }
+
 void FrameBuffer::clearColor(int index) { m_color_attachments[index].clear(); }
 
 void FrameBuffer::clearColor() {

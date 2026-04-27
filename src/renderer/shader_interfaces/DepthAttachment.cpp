@@ -32,6 +32,13 @@ bool DepthAttachment::testAndWrite(int x, int y, float depth) {
     return false;
 }
 
+float DepthAttachment::get(int x, int y) const {
+    if (isValidCoord(x, y)) {
+        return m_depths[x + y * m_width];
+    }
+    return 1.0f;
+}
+
 void DepthAttachment::clear() { std::ranges::fill(m_depths, 1.0f); }
 
 float* DepthAttachment::data() { return m_depths.data(); }

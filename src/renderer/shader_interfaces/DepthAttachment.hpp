@@ -13,6 +13,8 @@ public:
     bool test(int x, int y, float depth) const;
     bool testAndWrite(int x, int y, float depth);
 
+    float get(int x, int y) const;
+
     void clear();
 
     float* data();

@@ -23,11 +23,14 @@ public:
     bool testDepth(int x, int y, float depth) const;
     bool testAndWriteDepth(int x, int y, float depth);
 
+    Color getColor(int index, int x, int y) const;
+
+    float getDepth(int x, int y) const;
+
     void clearColor(int index);
     void clearColor();
 
     void clearDepth();
-
     uint32_t* getColorAttachmentData(int index);
     const uint32_t* getColorAttachmentData(int index) const;
 
