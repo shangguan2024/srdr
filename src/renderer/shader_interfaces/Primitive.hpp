@@ -15,10 +15,17 @@ struct EdgeEquation : public PlaneEquation {
 
 struct Primitive {
     std::array<ScreenVertex, 3> vertices;
+
     AABB<int, 2> aabb;
+
     float area;
+
     std::array<EdgeEquation, 3> edges;
+
     PlaneEquation depth_plane;
+    PlaneEquation inv_w_plane;
+    std::array<PlaneEquation, 4> rgba_plane;
+    std::array<PlaneEquation, 2> uv_plane;
 };
 
 } // namespace srdr

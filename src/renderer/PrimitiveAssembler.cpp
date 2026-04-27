@@ -69,9 +69,9 @@ void PrimitiveAssembler::assemblePrimitives(const std::vector<ClipVertex>& verti
         p.area = -p.area;
     }
 
-    const auto& v0 = p.vertices[0].position;
-    const auto& v1 = p.vertices[1].position;
-    const auto& v2 = p.vertices[2].position;
+    const auto& v0 = p.vertices[0];
+    const auto& v1 = p.vertices[1];
+    const auto& v2 = p.vertices[2];
 
     // edge function: inside > 0 (counter-clockwise)
     // edge Ei from vi to v(i+1)
@@ -84,12 +84,23 @@ void PrimitiveAssembler::assemblePrimitives(const std::vector<ClipVertex>& verti
         return EdgeEquation(A, B, C);
     };
 
-    p.edges[0] = edgeFunc(v0.x, v0.y, v1.x, v1.y);
-    p.edges[1] = edgeFunc(v1.x, v1.y, v2.x, v2.y);
-    p.edges[2] = edgeFunc(v2.x, v2.y, v0.x, v0.y);
+    p.edges[0] = edgeFunc(v0.position.x, v0.position.y, v1.position.x, v1.position.y);
+    p.edges[1] = edgeFunc(v1.position.x, v1.position.y, v2.position.x, v2.position.y);
+    p.edges[2] = edgeFunc(v2.position.x, v2.position.y, v0.position.x, v0.position.y);
 
-    p.depth_plane =
-            PlaneEquation::computePlane(v0.x, v0.y, v0.z, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z);
+    auto planeFunc = [&](float f0, float f1, float f2) -> PlaneEquation {
+        return PlaneEquation::computePlane(v0.position.x, v0.position.y, f0, v1.position.x,
+                v1.position.y, f1, v2.position.x, v2.position.y, f2);
+    };
+
+    p.depth_plane = planeFunc(v0.position.z, v1.position.z, v2.position.z);
+    p.inv_w_plane = planeFunc(v0.inv_w, v1.inv_w, v2.inv_w);
+    p.rgba_plane[0] = planeFunc(v0.v_color.r, v1.v_color.r, v2.v_color.r);
+    p.rgba_plane[1] = planeFunc(v0.v_color.g, v1.v_color.g, v2.v_color.g);
+    p.rgba_plane[2] = planeFunc(v0.v_color.b, v1.v_color.b, v2.v_color.b);
+    p.rgba_plane[3] = planeFunc(v0.v_color.a, v1.v_color.a, v2.v_color.a);
+    p.uv_plane[0] = planeFunc(v0.v_uv[0], v1.v_uv[0], v2.v_uv[0]);
+    p.uv_plane[1] = planeFunc(v0.v_uv[1], v1.v_uv[1], v2.v_uv[1]);
 
     return p;
 }
