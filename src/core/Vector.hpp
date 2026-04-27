@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstddef>
 #include <tuple>
 #include <type_traits>
@@ -105,9 +106,9 @@ public:
     const T& operator[](size_t index) const;
 
     template<typename Ta>
-    Vector operator*(Ta value) const;
-    template<typename Ta>
     Vector& operator*=(Ta value);
+    Vector& operator+=(const Vector& vec);
+    Vector& operator-=(const Vector& vec);
 };
 
 using Vec2 = Vector<float, 2>;
@@ -143,17 +144,70 @@ const T& Vector<T, N>::operator[](size_t index) const {
 
 template<typename T, size_t N>
 template<typename Ta>
-Vector<T, N> Vector<T, N>::operator*(Ta value) const {
-    Vector<T, N> vec(*this);
-    for (auto& elem: vec.data) elem *= value;
-    return vec;
-}
-
-template<typename T, size_t N>
-template<typename Ta>
 Vector<T, N>& Vector<T, N>::operator*=(Ta value) {
     for (auto& elem: data) elem *= value;
     return *this;
+}
+
+template<typename T, size_t N>
+Vector<T, N>& Vector<T, N>::operator+=(const Vector<T, N>& vector) {
+    for (size_t i = 0; i < N; ++i) data[i] += vector[i];
+    return *this;
+}
+
+template<typename T, size_t N>
+Vector<T, N>& Vector<T, N>::operator-=(const Vector<T, N>& vector) {
+    for (std::size_t i = 0; i < N; ++i) data[i] -= vector[i];
+    return *this;
+}
+
+template<typename T, typename Ta, size_t N>
+Vector<T, N> operator*(const Vector<T, N>& vector, Ta value) {
+    Vector<T, N> res(vector);
+    for (auto& elem: res.data) elem *= value;
+    return res;
+}
+
+template<typename T, size_t N>
+Vector<T, N> operator+(const Vector<T, N>& a, const Vector<T, N>& b) {
+    Vector<T, N> res(a);
+    return res += b;
+}
+
+template<typename T, size_t N>
+Vector<T, N> operator-(const Vector<T, N>& a, const Vector<T, N>& b) {
+    Vector<T, N> res(a);
+    return res -= b;
+}
+
+template<typename T, std::size_t N>
+T dot(const Vector<T, N>& a, const Vector<T, N>& b) {
+    T sum = T(0);
+    for (std::size_t i = 0; i < N; ++i) {
+        sum += a[i] * b[i];
+    }
+    return sum;
+}
+
+template<typename T>
+Vector<T, 3> cross(const Vector<T, 3>& a, const Vector<T, 3>& b) {
+    return Vector<T, 3>(a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2],
+            a[0] * b[1] - a[1] * b[0]);
+}
+
+template<typename T, std::size_t N>
+T length2(const Vector<T, N>& v) {
+    return dot(v, v);
+}
+
+template<typename T, std::size_t N>
+T length(const Vector<T, N>& v) {
+    return std::sqrt(length2(v));
+}
+
+template<typename T, std::size_t N>
+Vector<T, N> normalize(const Vector<T, N>& v) {
+    return v * (T(1) / length(v));
 }
 
 template<std::size_t I, typename T, std::size_t N>
