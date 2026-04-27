@@ -2,6 +2,7 @@ set(
 SRDR_CORE_HEADERS
     Color.hpp
     Vector.hpp
+    Matrix.hpp
     Geometry.hpp
 )
 
