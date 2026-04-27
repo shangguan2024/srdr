@@ -2,15 +2,26 @@
 #define COLOR_HPP
 
 #include "Vector.hpp"
+#include <array>
 #include <cstdint>
 
 namespace srdr {
 
-class Color {
-public:
+struct Color {
     Color() = default;
     Color(float r, float g, float b);
     Color(float r, float g, float b, float a);
+    Color(const Vec4f& color);
+
+    // clang-format off
+    union {
+        struct { float r, g, b, a; };
+        std::array<float, 4> data;
+    };
+    // clang-format on
+
+    Color operator*(float value) const;
+    Color& operator*=(float value);
 
     uint8_t red() const;
     uint8_t green() const;
@@ -19,12 +30,6 @@ public:
 
     // Returns a 4 byte value equal to #AARRGGBB
     uint32_t toUint32() const;
-
-    Color operator*(float value) const;
-    Color& operator*=(float value);
-
-private:
-    Vec4f m_data;
 };
 
 } // namespace srdr
