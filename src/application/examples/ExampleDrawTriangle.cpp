@@ -1,4 +1,5 @@
 #include "ExampleDrawTriangle.hpp"
+#include "Color.hpp"
 #include "Renderer.hpp"
 #include "Vertex.hpp"
 #include "WindowFactory.hpp"
@@ -22,7 +23,9 @@ int ExampleDrawTriangle::run() {
 
     std::vector<Vertex> tri(3);
     std::vector<std::size_t> ind{ 0, 1, 2 };
-    tri[0].color = tri[1].color = tri[2].color = { 1, 1, 1, 1 };
+    tri[0].color = Color(1, 0, 0);
+    tri[1].color = Color(0, 1, 0);
+    tri[2].color = Color(0, 0, 1);
     tri[0].position = { 0, 0, 0 };
     tri[1].position = { 1, 1, 0 };
     tri[2].position = { 0, 1, 0 };
