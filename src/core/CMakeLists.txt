@@ -3,12 +3,14 @@ SRDR_CORE_HEADERS
     Color.hpp
     Vector.hpp
     Matrix.hpp
+    Transform.hpp
     Geometry.hpp
 )
 
 set(
 SRDR_CORE_SOURCES
     Color.cpp
+    Transform.cpp
     Geometry.cpp
 )
 
