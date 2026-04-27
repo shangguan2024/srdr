@@ -5,7 +5,7 @@
 
 namespace srdr {
 
-static std::function<VertexOutput(VertexInput)> s_default_vs = [](const VertexInput& in) {
+static VertexShaderProgram s_default_vs = [](const VertexInput& in) {
     VertexOutput out;
     const auto& [x, y, z] = in.a_position;
     out.v_position = Vec4(x, y, z, 1.0f);
@@ -21,7 +21,7 @@ VertexShader::VertexShader()
 VertexShader::VertexShader(VertexShaderProgram vs)
         : m_vs(vs) {}
 
-void VertexShader::setShader(std::function<VertexOutput(VertexInput)> vs) { m_vs = vs; }
+void VertexShader::setShader(VertexShaderProgram vs) { m_vs = vs; }
 
 void VertexShader::resetShader() { m_vs = s_default_vs; }
 
