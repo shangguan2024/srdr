@@ -18,6 +18,34 @@ Renderer::Renderer(std::shared_ptr<IWindow> window)
     init();
 }
 
+void Renderer::enable(State state) {
+    switch (state) {
+        case State::DEPTH_TEST:
+            m_output_merger->enableDepthTest();
+            break;
+        case State::BLEND:
+            m_output_merger->enableBlend();
+            break;
+        default:
+            // TODO: exception ?
+            break;
+    }
+}
+
+void Renderer::disable(State state) {
+    switch (state) {
+        case State::DEPTH_TEST:
+            m_output_merger->disableDepthTest();
+            break;
+        case State::BLEND:
+            m_output_merger->disableBlend();
+            break;
+        default:
+            // TODO: exception ?
+            break;
+    }
+}
+
 void Renderer::beginScene() {
     m_viewport_size = m_window->getWindowSize();
 
@@ -31,6 +59,11 @@ void Renderer::beginScene() {
 }
 
 void Renderer::endScene() { render(); }
+
+void Renderer::clearFrameBuffer() {
+    m_frame_buffer->clearColor();
+    m_frame_buffer->clearDepth();
+}
 
 void Renderer::draw(const std::vector<Vertex>& vertices, const std::vector<std::size_t>& indices) {
     draw(vertices.data(), 0, vertices.size(), indices.data(), 0, indices.size(), 0ull);

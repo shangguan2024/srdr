@@ -14,17 +14,30 @@
 #include "VertexLoader.hpp"
 #include "VertexShader.hpp"
 #include <cstddef>
+#include <cstdint>
 #include <memory>
 #include <vector>
 
 namespace srdr {
 
+enum class State : std::uint8_t {
+    UNKNOWN,
+    DEPTH_TEST,
+    BLEND,
+    STATE_COUNT,
+};
+
 class Renderer {
 public:
     Renderer(std::shared_ptr<IWindow> window);
 
+    void enable(State state);
+    void disable(State state);
+
     void beginScene();
     void endScene();
+
+    void clearFrameBuffer();
 
     void draw(const std::vector<Vertex>& vertices, const std::vector<std::size_t>& indices);
     void draw(const Vertex* vertices, int v_base, int v_count, const std::size_t* indices,

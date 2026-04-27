@@ -10,7 +10,9 @@ static BlendFunction s_default_blend_function = [](const Color& src, const Color
 };
 
 OutputMerger::OutputMerger()
-        : m_blend_function(s_default_blend_function) {}
+        : m_enable_depth_test(false),
+          m_enable_blend(false),
+          m_blend_function(s_default_blend_function) {}
 
 void OutputMerger::mergeOutputs(const std::vector<FragmentOutput>& outputs, FrameBuffer* fb) {
     for (const auto& pixel: outputs) {
