@@ -51,6 +51,7 @@ void Renderer::render() {
     m_primitive_assembler->assemblePrimitives(m_clip_vertex_cache, m_primitive_cache);
     m_rasterizer->setWindowSize(m_window->getWindowSize());
     m_rasterizer->rasterizePrimitives(m_primitive_cache, m_fragment_input_cache);
+    m_fragment_shader->processFragments(m_fragment_input_cache, m_fragment_output_cache);
 
     // TODO
 }
