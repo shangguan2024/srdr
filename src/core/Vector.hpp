@@ -108,10 +108,12 @@ public:
     T& operator[](size_t index);
     const T& operator[](size_t index) const;
 
-    template<typename Ta>
-    Vector& operator*=(Ta value);
+    Vector& operator*=(T value);
+
     Vector& operator+=(const Vector& vec);
     Vector& operator-=(const Vector& vec);
+    Vector& operator*=(const Vector& vec);
+    Vector& operator/=(const Vector& vec);
 };
 
 using Vec2 = Vector<float, 2>;
@@ -161,29 +163,39 @@ const T& Vector<T, N>::operator[](size_t index) const {
 }
 
 template<typename T, size_t N>
-template<typename Ta>
-Vector<T, N>& Vector<T, N>::operator*=(Ta value) {
+Vector<T, N>& Vector<T, N>::operator*=(T value) {
     for (auto& elem: data) elem *= value;
     return *this;
 }
 
 template<typename T, size_t N>
-Vector<T, N>& Vector<T, N>::operator+=(const Vector<T, N>& vector) {
-    for (size_t i = 0; i < N; ++i) data[i] += vector[i];
+Vector<T, N>& Vector<T, N>::operator+=(const Vector<T, N>& vec) {
+    for (size_t i = 0; i < N; ++i) data[i] += vec[i];
     return *this;
 }
 
 template<typename T, size_t N>
-Vector<T, N>& Vector<T, N>::operator-=(const Vector<T, N>& vector) {
-    for (std::size_t i = 0; i < N; ++i) data[i] -= vector[i];
+Vector<T, N>& Vector<T, N>::operator-=(const Vector<T, N>& vec) {
+    for (std::size_t i = 0; i < N; ++i) data[i] -= vec[i];
     return *this;
 }
 
-template<typename T, typename Ta, size_t N>
-Vector<T, N> operator*(const Vector<T, N>& vector, Ta value) {
+template<typename T, size_t N>
+Vector<T, N>& Vector<T, N>::operator*=(const Vector<T, N>& vec) {
+    for (size_t i = 0; i < N; ++i) data[i] *= vec[i];
+    return *this;
+}
+
+template<typename T, size_t N>
+Vector<T, N>& Vector<T, N>::operator/=(const Vector<T, N>& vec) {
+    for (size_t i = 0; i < N; ++i) data[i] /= vec[i];
+    return *this;
+}
+
+template<typename T, size_t N>
+Vector<T, N> operator*(const Vector<T, N>& vector, T value) {
     Vector<T, N> res(vector);
-    for (auto& elem: res.data) elem *= value;
-    return res;
+    return res *= value;
 }
 
 template<typename T, size_t N>
@@ -196,6 +208,18 @@ template<typename T, size_t N>
 Vector<T, N> operator-(const Vector<T, N>& a, const Vector<T, N>& b) {
     Vector<T, N> res(a);
     return res -= b;
+}
+
+template<typename T, size_t N>
+Vector<T, N> operator*(const Vector<T, N>& a, const Vector<T, N>& b) {
+    Vector<T, N> res(a);
+    return res *= b;
+}
+
+template<typename T, size_t N>
+Vector<T, N> operator/(const Vector<T, N>& a, const Vector<T, N>& b) {
+    Vector<T, N> res(a);
+    return res /= b;
 }
 
 template<typename T, std::size_t N>
