@@ -10,6 +10,12 @@ Color::Color(float r, float g, float b)
 Color::Color(float r, float g, float b, float a)
         : data{ r, g, b, a } {}
 
+Color::Color(const Vec3f& rgb, float a)
+        : r(rgb.r),
+          g(rgb.g),
+          b(rgb.b),
+          a(a) {}
+
 Color::Color(const Vec4f& color)
         : data(color.data) {}
 
@@ -28,6 +34,8 @@ Color& Color::operator*=(float value) {
     a *= value;
     return *this;
 }
+
+Vec3 Color::rgb() const { return Vec3(r, g, b); }
 
 uint8_t Color::red() const { return uint8_t(std::round(r * 255)); }
 

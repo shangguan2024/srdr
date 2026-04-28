@@ -12,6 +12,7 @@ struct Color {
     Color(float r, float g, float b);
     Color(float r, float g, float b, float a);
     Color(const Vec4f& color);
+    Color(const Vec3f& rgb, float a);
     Color(uint32_t argb);
 
     // clang-format off
@@ -22,6 +23,8 @@ struct Color {
     // clang-format on
 
     Color& operator*=(float value);
+
+    Vec3 rgb() const;
 
     uint8_t red() const;
     uint8_t green() const;
