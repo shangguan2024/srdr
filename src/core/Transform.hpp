@@ -14,6 +14,8 @@ Mat4 translate(const Vec3& offset);
 
 Mat4 translate(const Mat4& m, const Vec3& offset);
 
+Mat4 rotate(float angle, const Vec3& axis);
+
 } // namespace srdr::transform
 
 #endif // TRANSFORM_HPP
