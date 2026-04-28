@@ -15,6 +15,8 @@ SRDR_RENDERER_HEADERS
     shader_interfaces/Vertex.hpp
     shader_interfaces/Primitive.hpp
     shader_interfaces/Fragment.hpp
+
+    scene/Camera.hpp
 )
 
 set(
@@ -31,6 +33,8 @@ SRDR_RENDERER_SOURCES
     shader_interfaces/FrameBuffer.cpp
     shader_interfaces/ColorAttachment.cpp
     shader_interfaces/DepthAttachment.cpp
+
+    scene/Camera.cpp
 )
 
 add_library(

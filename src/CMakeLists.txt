@@ -45,6 +45,7 @@ SRDR_RENDERER_INCLUDES
     ${PROJECT_SOURCE_DIR}/renderer
     ${PROJECT_SOURCE_DIR}/renderer/stage
     ${PROJECT_SOURCE_DIR}/renderer/shader_interfaces
+    ${PROJECT_SOURCE_DIR}/renderer/scene
 )
 add_subdirectory(renderer)
 
