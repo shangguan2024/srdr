@@ -7,8 +7,7 @@ namespace srdr {
 
 static VertexShaderProgram s_default_vs = [](const VertexInput& in) {
     VertexOutput out;
-    const auto& [x, y, z] = in.a_position;
-    out.v_position = Vec4(x, y, z, 1.0f);
+    out.v_position = Vec4(in.a_position, 1.0f);
     out.v_normal = in.a_normal;
     out.v_color = in.a_color;
     out.v_uv = in.a_uv;

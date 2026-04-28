@@ -6,8 +6,7 @@ namespace srdr {
 
 static FragmentShaderProgram s_default_fs = [](const FragmentInput& in) {
     FragmentOutput out;
-    const auto& [x, y, z, w] = in.f_position;
-    out.o_position = Vec3(x, y, z);
+    out.o_position = in.f_position;
     out.o_color = in.v_color;
     return out;
 };

@@ -100,6 +100,9 @@ public:
     template<typename... Args>
     Vector(Args&&... args) requires(sizeof...(Args) == N);
 
+    Vector(const Vector<T, N - 1>& vec, T val);
+    Vector(const Vector<T, N + 1>& vec);
+
     using detail::VectorStorage<T, N>::data;
 
     T& operator[](size_t index);
@@ -131,6 +134,21 @@ template<typename T, size_t N>
 template<typename... Args>
 Vector<T, N>::Vector(Args&&... args) requires(sizeof...(Args) == N)
         : detail::VectorStorage<T, N>(args...) {}
+
+template<typename T, size_t N>
+Vector<T, N>::Vector(const Vector<T, N - 1>& vec, T val) {
+    for (size_t i = 0; i + 1 < N; ++i) {
+        data[i] = vec[i];
+    }
+    data[N - 1] = val;
+}
+
+template<typename T, size_t N>
+Vector<T, N>::Vector(const Vector<T, N + 1>& vec) {
+    for (size_t i = 0; i < N; ++i) {
+        data[i] = vec[i];
+    }
+}
 
 template<typename T, size_t N>
 T& Vector<T, N>::operator[](size_t index) {
