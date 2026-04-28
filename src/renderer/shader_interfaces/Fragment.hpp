@@ -11,6 +11,7 @@ struct FragmentInput {
     Vec3 v_normal;
     Color v_color;
     Vec2 v_uv;
+    Vec4 v_world_position;
 };
 
 struct FragmentOutput {

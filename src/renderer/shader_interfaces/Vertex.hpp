@@ -25,6 +25,7 @@ struct VertexOutput {
     Vec3 v_normal;
     Color v_color;
     Vec2 v_uv;
+    Vec4 v_world_position;
 };
 
 using ClipVertex = VertexOutput;
@@ -36,6 +37,7 @@ struct ScreenVertex {
     Vec3 v_normal;
     Color v_color;
     Vec2 v_uv;
+    Vec4 v_world_position;
 };
 
 } // namespace srdr

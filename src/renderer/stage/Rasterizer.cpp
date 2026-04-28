@@ -37,6 +37,10 @@ void Rasterizer::rasterizePrimitive(const Primitive& p, std::vector<FragmentInpu
         float a = p.rgba_plane[3].evaluate(x0, y0);
         float u = p.uv_plane[0].evaluate(x0, y0);
         float v = p.uv_plane[1].evaluate(x0, y0);
+        float wx = p.world_pos_plane[0].evaluate(x0, y0);
+        float wy = p.world_pos_plane[1].evaluate(x0, y0);
+        float wz = p.world_pos_plane[2].evaluate(x0, y0);
+        float ww = p.world_pos_plane[3].evaluate(x0, y0);
 
         for (int x = min_x; x <= max_x; ++x) {
             if (e0 >= 0.0f && e1 >= 0.0f && e2 >= 0.0f) {
@@ -48,6 +52,7 @@ void Rasterizer::rasterizePrimitive(const Primitive& p, std::vector<FragmentInpu
                 // TODO: fragment.v_normal = ...
                 fragment.v_color = Color(r, g, b, a) * w;
                 fragment.v_uv = Vec2(u, v) * w;
+                fragment.v_world_position = Vec4(wx, wy, wz, ww) * w;
             }
 
             e0 += p.edges[0].stepX();
@@ -61,6 +66,10 @@ void Rasterizer::rasterizePrimitive(const Primitive& p, std::vector<FragmentInpu
             a += p.rgba_plane[3].stepX();
             u += p.uv_plane[0].stepX();
             v += p.uv_plane[1].stepX();
+            wx += p.world_pos_plane[0].stepX();
+            wy += p.world_pos_plane[1].stepX();
+            wz += p.world_pos_plane[2].stepX();
+            ww += p.world_pos_plane[3].stepX();
         }
     }
 }

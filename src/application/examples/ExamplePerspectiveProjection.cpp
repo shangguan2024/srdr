@@ -26,7 +26,7 @@ int ExamplePerspectiveProjection::run() {
     Renderer device(window);
     device.enable(State::DEPTH_TEST);
 
-    Camera camera(Vec3(0, 0, 3), Vec3(0, 0, 0), Vec3(0, 1, 0), 1.0472f,
+    Camera camera(Vec3(0, -1, 2), Vec3(0, 0, 0), Vec3(0, 1, 0), 1.0472f,
             float(width) / float(height), 0.1f, 100.0f);
 
     float angle = 0.0f;
@@ -37,6 +37,7 @@ int ExamplePerspectiveProjection::run() {
         Vec4 clip = mvp * Vec4(in.a_position, 1.0f);
         VertexOutput out;
         out.v_position = clip;
+        out.v_world_position = model * Vec4(in.a_position, 1.0f);
         out.v_color = in.a_color;
         return out;
     });

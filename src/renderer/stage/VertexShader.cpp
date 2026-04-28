@@ -11,6 +11,7 @@ static VertexShaderProgram s_default_vs = [](const VertexInput& in) {
     out.v_normal = in.a_normal;
     out.v_color = in.a_color;
     out.v_uv = in.a_uv;
+    out.v_world_position = Vec4(in.a_position, 1.0f);
     return out;
 };
 

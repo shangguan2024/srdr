@@ -26,6 +26,7 @@ struct Primitive {
     PlaneEquation inv_w_plane;
     std::array<PlaneEquation, 4> rgba_plane;
     std::array<PlaneEquation, 2> uv_plane;
+    std::array<PlaneEquation, 4> world_pos_plane;
 };
 
 } // namespace srdr

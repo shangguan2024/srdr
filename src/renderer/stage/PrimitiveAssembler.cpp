@@ -42,6 +42,7 @@ void PrimitiveAssembler::assemblePrimitives(const std::vector<ClipVertex>& verti
         sv.v_normal = cv.v_normal * inv_w;
         sv.v_color = cv.v_color * inv_w;
         sv.v_uv = cv.v_uv * inv_w;
+        sv.v_world_position = cv.v_world_position * inv_w;
 
         return sv;
     };
@@ -101,6 +102,14 @@ void PrimitiveAssembler::assemblePrimitives(const std::vector<ClipVertex>& verti
     p.rgba_plane[3] = planeFunc(v0.v_color.a, v1.v_color.a, v2.v_color.a);
     p.uv_plane[0] = planeFunc(v0.v_uv[0], v1.v_uv[0], v2.v_uv[0]);
     p.uv_plane[1] = planeFunc(v0.v_uv[1], v1.v_uv[1], v2.v_uv[1]);
+    p.world_pos_plane[0] =
+            planeFunc(v0.v_world_position[0], v1.v_world_position[0], v2.v_world_position[0]);
+    p.world_pos_plane[1] =
+            planeFunc(v0.v_world_position[1], v1.v_world_position[1], v2.v_world_position[1]);
+    p.world_pos_plane[2] =
+            planeFunc(v0.v_world_position[2], v1.v_world_position[2], v2.v_world_position[2]);
+    p.world_pos_plane[3] =
+            planeFunc(v0.v_world_position[3], v1.v_world_position[3], v2.v_world_position[3]);
 
     return p;
 }
