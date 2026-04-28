@@ -1,8 +1,8 @@
-#include "ExampleBlend.hpp"
+#include "ExamplePerspectiveProjection.hpp"
 
 int main() {
-    srdr::ExampleBlend eb;
-    eb.run();
+    srdr::ExamplePerspectiveProjection epp;
+    epp.run();
 
     return 0;
 }

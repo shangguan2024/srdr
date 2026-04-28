@@ -4,6 +4,7 @@ SRDR_APPLICATION_HEADERS
     examples/ExampleDrawTriangle.hpp
     examples/ExampleDepthTest.hpp
     examples/ExampleBlend.hpp
+    examples/ExamplePerspectiveProjection.hpp
 )
 
 set(
@@ -14,6 +15,7 @@ SRDR_APPLICATION_SOURCES
     examples/ExampleDrawTriangle.cpp
     examples/ExampleDepthTest.cpp
     examples/ExampleBlend.cpp
+    examples/ExamplePerspectiveProjection.cpp
 )
 
 add_executable(srdr ${SRDR_APPLICATION_HEADERS} ${SRDR_APPLICATION_SOURCES})
