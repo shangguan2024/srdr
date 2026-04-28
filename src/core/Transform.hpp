@@ -6,7 +6,7 @@
 
 namespace srdr::transform {
 
-Mat4 perspective(float fov, float aspect, float near, float far);
+Mat4 perspective(float fov, float aspect, float z_near, float z_far);
 
 Mat4 lookAt(const Vec3& eye, const Vec3& center, const Vec3& up);
 

@@ -4,13 +4,13 @@
 
 namespace srdr::transform {
 
-Mat4 perspective(float fov, float aspect, float near, float far) {
+Mat4 perspective(float fov, float aspect, float z_near, float z_far) {
     float tanHalfFov = std::tan(fov * 0.5f);
     Mat4 m = Mat4::zero();
     m(0, 0) = 1.0f / (aspect * tanHalfFov);
     m(1, 1) = 1.0f / tanHalfFov;
-    m(2, 2) = (far + near) / (near - far);
-    m(2, 3) = 2.0f * near * far / (near - far);
+    m(2, 2) = (z_far + z_near) / (z_near - z_far);
+    m(2, 3) = 2.0f * z_near * z_far / (z_near - z_far);
     m(3, 2) = -1.0f;
     return m;
 }
