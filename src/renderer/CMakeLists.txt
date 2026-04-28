@@ -17,6 +17,7 @@ SRDR_RENDERER_HEADERS
     shader_interfaces/Fragment.hpp
 
     scene/Camera.hpp
+    scene/Light.hpp
 )
 
 set(
