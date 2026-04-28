@@ -46,6 +46,18 @@ void Renderer::disable(State state) {
     }
 }
 
+void Renderer::setVertexShader(VertexShaderProgram vs) {
+    m_vertex_shader->setShader(std::move(vs));
+}
+
+void Renderer::resetVertexShader() { m_vertex_shader->resetShader(); }
+
+void Renderer::setFragmentShader(FragmentShaderProgram fs) {
+    m_fragment_shader->setShader(std::move(fs));
+}
+
+void Renderer::resetFragmentShader() { m_fragment_shader->resetShader(); }
+
 void Renderer::beginScene() {
     m_viewport_size = m_window->getWindowSize();
 

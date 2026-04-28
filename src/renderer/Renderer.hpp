@@ -34,6 +34,12 @@ public:
     void enable(State state);
     void disable(State state);
 
+    void setVertexShader(VertexShaderProgram vs);
+    void resetVertexShader();
+
+    void setFragmentShader(FragmentShaderProgram fs);
+    void resetFragmentShader();
+
     void beginScene();
     void endScene();
 

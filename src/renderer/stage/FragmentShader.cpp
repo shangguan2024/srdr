@@ -15,9 +15,9 @@ FragmentShader::FragmentShader()
         : m_fs(s_default_fs) {}
 
 FragmentShader::FragmentShader(FragmentShaderProgram fs)
-        : m_fs(fs) {}
+        : m_fs(std::move(fs)) {}
 
-void FragmentShader::setShader(FragmentShaderProgram fs) { m_fs = fs; }
+void FragmentShader::setShader(FragmentShaderProgram fs) { m_fs = std::move(fs); }
 
 void FragmentShader::resetShader() { m_fs = s_default_fs; }
 

@@ -18,9 +18,9 @@ VertexShader::VertexShader()
         : m_vs(s_default_vs) {}
 
 VertexShader::VertexShader(VertexShaderProgram vs)
-        : m_vs(vs) {}
+        : m_vs(std::move(vs)) {}
 
-void VertexShader::setShader(VertexShaderProgram vs) { m_vs = vs; }
+void VertexShader::setShader(VertexShaderProgram vs) { m_vs = std::move(vs); }
 
 void VertexShader::resetShader() { m_vs = s_default_vs; }
 
