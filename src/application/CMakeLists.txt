@@ -5,6 +5,7 @@ SRDR_APPLICATION_HEADERS
     examples/ExampleDepthTest.hpp
     examples/ExampleBlend.hpp
     examples/ExamplePerspectiveProjection.hpp
+    examples/ExamplePhongLighting.hpp
 )
 
 set(
@@ -16,6 +17,7 @@ SRDR_APPLICATION_SOURCES
     examples/ExampleDepthTest.cpp
     examples/ExampleBlend.cpp
     examples/ExamplePerspectiveProjection.cpp
+    examples/ExamplePhongLighting.cpp
 )
 
 add_executable(srdr ${SRDR_APPLICATION_HEADERS} ${SRDR_APPLICATION_SOURCES})

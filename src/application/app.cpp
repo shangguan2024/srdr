@@ -1,8 +1,8 @@
-#include "ExamplePerspectiveProjection.hpp"
+#include "ExamplePhongLighting.hpp"
 
 int main() {
-    srdr::ExamplePerspectiveProjection epp;
-    epp.run();
+    srdr::ExamplePhongLighting epl;
+    epl.run();
 
     return 0;
 }
