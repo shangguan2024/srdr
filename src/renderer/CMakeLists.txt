@@ -1,12 +1,13 @@
 set(
 SRDR_RENDERER_HEADERS
-    VertexLoader.hpp
-    VertexShader.hpp
-    PrimitiveAssembler.hpp
-    Rasterizer.hpp
-    FragmentShader.hpp
-    OutputMerger.hpp
     Renderer.hpp
+
+    stage/VertexLoader.hpp
+    stage/VertexShader.hpp
+    stage/PrimitiveAssembler.hpp
+    stage/Rasterizer.hpp
+    stage/FragmentShader.hpp
+    stage/OutputMerger.hpp
 
     shader_interfaces/FrameBuffer.hpp
     shader_interfaces/ColorAttachment.hpp
@@ -18,13 +19,14 @@ SRDR_RENDERER_HEADERS
 
 set(
 SRDR_RENDERER_SOURCES
-    VertexLoader.cpp
-    VertexShader.cpp
-    PrimitiveAssembler.cpp
-    Rasterizer.cpp
-    FragmentShader.cpp
-    OutputMerger.cpp
     Renderer.cpp
+
+    stage/VertexLoader.cpp
+    stage/VertexShader.cpp
+    stage/PrimitiveAssembler.cpp
+    stage/Rasterizer.cpp
+    stage/FragmentShader.cpp
+    stage/OutputMerger.cpp
 
     shader_interfaces/FrameBuffer.cpp
     shader_interfaces/ColorAttachment.cpp

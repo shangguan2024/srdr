@@ -43,6 +43,7 @@ add_subdirectory(platform)
 set(
 SRDR_RENDERER_INCLUDES
     ${PROJECT_SOURCE_DIR}/renderer
+    ${PROJECT_SOURCE_DIR}/renderer/stage
     ${PROJECT_SOURCE_DIR}/renderer/shader_interfaces
 )
 add_subdirectory(renderer)
