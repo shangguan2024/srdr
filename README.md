@@ -64,6 +64,21 @@ srdr/
 ├── README.md                  # 本文件
 ├── assets/                    # 资源
 ├── docs/                      # 文档
+│   ├── examples/              # 示例文档
+│   │   ├── index.md           # 概览与快速索引
+│   │   ├── 01-window-test.md
+│   │   ├── 02-draw-triangle.md
+│   │   ├── 03-depth-test.md
+│   │   ├── 04-blend.md
+│   │   ├── 05-perspective-projection.md
+│   │   └── 06-phong-lighting.md
+│   └── api/                   # API 文档
+│       ├── index.md           # 模块概览与快速索引
+│       ├── renderer.md        # Renderer / FrameBuffer / OutputMerger
+│       ├── shader-interfaces.md  # Vertex / Fragment / Primitive
+│       ├── math.md            # Vector / Matrix / Color / Transform
+│       ├── scene.md           # Camera / Light
+│       └── platform.md        # IWindow / WindowFactory
 └── src/
     ├── CMakeLists.txt         # 顶层 CMake 构建入口
     ├── core/                  # 核心数学与数据结构库 (srdr_core)
@@ -78,7 +93,7 @@ srdr/
     │   ├── IWindow.hpp           # 窗口接口
     │   ├── Win32Window.hpp/cpp   # Windows 平台实现 (Win32 GDI)
     │   └── WindowFactory.hpp/cpp # 窗口工厂
-    ├── renderer/                 # 渲染管线 (srdr_renderer)
+    ├── renderer/              # 渲染管线 (srdr_renderer)
     │   ├── CMakeLists.txt
     │   ├── Renderer.hpp/cpp   # 渲染器主类
     │   ├── stage/             # 渲染管线各阶段
